@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>الأسئلة</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<form method="POST">
+
+<div class="intro-card">
+من فضلك أجب على هذه الأسئلة بصراحة ووضوح لمعرفة مستوى طفلك / طفلتك
+</div>
+
+{% for cat, qs in questions.items() %}
+
+<h3>{{ cat }}</h3>
+
+{% for q in qs %}
+
+<div class="card">
+
+    <p class="question-title">{{ q }}</p>
+
+    <label class="option-card">
+        <input type="radio" name="{{ cat }}_{{ loop.index }}" value="أبداً" required>
+        أبداً
+    </label>
+
+    <label class="option-card">
+        <input type="radio" name="{{ cat }}_{{ loop.index }}" value="نادراً">
+        نادراً
+    </label>
+
+    <label class="option-card">
+        <input type="radio" name="{{ cat }}_{{ loop.index }}" value="أحياناً">
+        أحياناً
+    </label>
+
+    <label class="option-card">
+        <input type="radio" name="{{ cat }}_{{ loop.index }}" value="دائماً">
+        دائماً
+    </label>
+
+</div>
+
+{% endfor %}
+{% endfor %}
+
+<div class="btn-row">
+    <a href="javascript:history.back()" class="btn-back">رجوع</a>
+    <button type="submit" class="btn-primary">تحليل</button>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

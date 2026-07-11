@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>القارئ الذكي</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reader_ai.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="/child_dashboard">🔙 رجوع</a>
+</div>
+
+<div class="container">
+
+<h1>📖 القارئ الذكي للأطفال</h1>
+
+<!-- TEXT -->
+<div id="textBox" class="text-box">
+
+<span>في</span>
+<span>يوم</span>
+<span>جميل</span>
+<span>كانت</span>
+<span>تجلس</span>
+
+<span data-img="/static/images/cat.jpg" onclick="showImg(this)">القطة</span>
+
+<span>تجلس</span>
+<span>في</span>
+<span>الحديقة</span>
+
+<span>وكان</span>
+
+<span data-img="/static/images/dog.jpg" onclick="showImg(this)">الكلب</span>
+
+<span>يلعب</span>
+<span>تحت</span>
+
+<span data-img="/static/images/tree.jpg" onclick="showImg(this)">الشجرة</span>
+
+<span>الكبيرة</span>
+<span>وشرب</span>
+
+<span data-img="/static/images/milk.jpg" onclick="showImg(this)">الحليب</span>
+
+<span>ثم</span>
+<span>لعب</span>
+
+<span data-img="/static/images/toy.jpg" onclick="showImg(this)">اللعبة</span>
+
+<span>الملونة</span>
+
+</div>
+
+<!-- IMAGE POPUP -->
+<div id="imgBox" class="img-box"></div>
+
+<!-- CONTROLS -->
+<div class="controls">
+
+<button onclick="readText()">🔊 قراءة النص</button>
+
+<button onclick="startVoice()">🎤 اقرأ أنت</button>
+
+</div>
+
+<!-- FILE INPUT -->
+<div class="file-upload">
+
+<label class="file-btn">
+📁 choisir un fichier
+<input type="file" id="fileInput">
+</label>
+
+<button onclick="loadFile()">📤 تحميل الملف</button>
+
+</div>
+
+</div>
+
+<script>
+
+let words = document.querySelectorAll("#textBox span");
+let synth = window.speechSynthesis;
+
+/* ================= TEXT TO SPEECH ================= */
+function readText(){
+
+    let text = Array.from(words).map(w => w.innerText).join(" ");
+
+    let utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "ar";
+
+    utter.onboundary = function(event){
+        let index = event.charIndex;
+        highlightWord(index);
+    }
+
+    synth.speak(utter);
+}
+
+/* ================= HIGHLIGHT ================= */
+function highlightWord(i){
+    words.forEach(w => w.classList.remove("active"));
+
+    let current = words[Math.floor(i / 3)];
+
+    if(current){
+        current.classList.add("active");
+    }
+}
+
+/* ================= VOICE INPUT ================= */
+function startVoice(){
+
+    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "ar";
+
+    recognition.start();
+
+    recognition.onresult = function(event){
+
+        let text = event.results[0][0].transcript;
+
+        words.forEach(w => {
+            if(text.includes(w.innerText)){
+                w.classList.add("active");
+            }
+        });
+    }
+}
+
+/* ================= SHOW IMAGE ================= */
+function showImg(el){
+
+    let box = document.getElementById("imgBox");
+
+    box.innerHTML = `
+        <div class="img-wrapper">
+            <img src="${el.dataset.img}">
+            <button onclick="closeImg()">✖️</button>
+        </div>
+    `;
+
+    box.classList.add("show");
+}
+
+/* ================= CLOSE IMAGE ================= */
+function closeImg(){
+    document.getElementById("imgBox").classList.remove("show");
+}
+
+/* ================= FILE INPUT ================= */
+function loadFile(){
+
+    let file = document.getElementById("fileInput").files[0];
+
+    if(!file){
+        alert("اختر ملف أولاً");
+        return;
+    }
+
+    alert("تم اختيار الملف: " + file.name);
+}
+
+</script>
+
+</body>
+</html>

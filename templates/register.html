@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب جديد | Takhati.Dz</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="auth-page">
+
+<a href="{{ url_for('login') }}" class="back-btn">رجوع</a>
+
+<div class="auth-card register-card">
+
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+         class="auth-logo"
+         alt="logo">
+
+    <h2>إنشاء حساب جديد</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="register-form">
+
+        <input type="text"
+               name="username"
+               placeholder="الاسم الكامل"
+               required>
+
+        <input type="date"
+               name="birth_date">
+
+        <input type="text"
+               name="birth_place"
+               placeholder="مكان الميلاد">
+
+        <input type="text"
+               name="email_phone"
+               placeholder="رقم الهاتف أو البريد الإلكتروني">
+
+        <input type="text"
+               name="national_id"
+               placeholder="رقم البطاقة الوطنية">
+
+        <select name="gender">
+            <option value="">الجنس</option>
+            <option value="ذكر">ذكر</option>
+            <option value="أنثى">أنثى</option>
+        </select>
+
+        <select name="role" required>
+            <option value="">تحديد الصفة</option>
+            <option value="admin">أدمن</option>
+            <option value="teacher">أستاذ</option>
+            <option value="parent">ولي أمر</option>
+            <option value="specialist">مختص</option>
+        </select>
+
+        <div class="password-box">
+
+            <input type="password"
+                   id="password"
+                   name="password"
+                   placeholder="أدخل كلمة المرور"
+                   required>
+
+            <span class="eye-icon" onclick="togglePassword()">
+                👁
+            </span>
+
+        </div>
+
+        <button type="submit">
+            إنشاء الحساب
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+function togglePassword() {
+
+    const password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+
+}
+</script>
+
+</body>
+</html>

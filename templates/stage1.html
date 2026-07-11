@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<form method="POST">
+
+<div class="question-title">
+    من ماذا يعاني طفلك / طفلتك ؟
+</div>
+
+<label class="option-card"><input type="checkbox" name="causes" value="development"> صعوبات التعلم النمائية و الأكاديمية</label>
+<label class="option-card"><input type="checkbox" name="causes" value="autism"> إضطراب طيف التوحد</label>
+<label class="option-card"><input type="checkbox" name="causes" value="adhd"> تشتت الإنتباه و فرط الحركة</label>
+<label class="option-card"><input type="checkbox" name="causes" value="sensory"> مشاكل الحواس (السمع و البصر)</label>
+<label class="option-card"><input type="checkbox" name="causes" value="slow"> بطء في التعلم</label>
+<label class="option-card"><input type="checkbox" name="causes" value="impulsive"> تشتت الانتباه مع الإندفاعية</label>
+<label class="option-card"><input type="checkbox" name="causes" value="language"> صعوبة في إكتساب اللغة</label>
+
+<div class="btn-row">
+    <a href="javascript:history.back()" class="btn-back">رجوع</a>
+    <button type="submit" class="btn-primary">التالي</button>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

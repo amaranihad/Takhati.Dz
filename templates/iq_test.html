@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>اختبار الذكاء</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="main-card">
+
+<h2>🧠 اختبار الذكاء</h2>
+
+<p>أجب عن الأسئلة التالية بنعم أو لا</p>
+
+<!-- QUESTIONS -->
+<div id="quiz">
+
+    <div class="q">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" class="img">
+        <p>هل تستمتع بمراقبة الألوان الحية والتصاميم في الطبيعة؟</p>
+        <button onclick="answer(1,1)">نعم</button>
+        <button onclick="answer(1,0)">لا</button>
+    </div>
+
+    <div class="q">
+        <img src="{{ url_for('static', filename='images/2.jpg') }}" class="img">
+        <p>هل ترسم أشكالاً متنوعة؟</p>
+        <button onclick="answer(2,1)">نعم</button>
+        <button onclick="answer(2,0)">لا</button>
+    </div>
+
+    <div class="q">
+        <img src="{{ url_for('static', filename='images/3.jpg') }}" class="img">
+        <p>هل تتخيل صوراً واضحة عندما تغلق عينيك؟</p>
+        <button onclick="answer(3,1)">نعم</button>
+        <button onclick="answer(3,0)">لا</button>
+    </div>
+
+    <div class="q">
+        <img src="{{ url_for('static', filename='images/4.jpg') }}" class="img">
+        <p>هل تكون لديك صورة واضحة للأشياء عندما تراها؟</p>
+        <button onclick="answer(4,1)">نعم</button>
+        <button onclick="answer(4,0)">لا</button>
+    </div>
+
+</div>
+
+<!-- RESULT -->
+<div id="result" class="result"></div>
+
+<!-- BUTTONS -->
+<div class="btn-row">
+    <a href="javascript:history.back()" class="btn-back">رجوع</a>
+    <a href="{{ url_for('landing_page') }}" class="btn-primary">متابعة</a>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let score = 0;
+let answered = 0;
+
+function answer(q, value){
+
+    if(document.getElementById("q"+q)) return;
+
+    answered++;
+
+    if(value === 1){
+        score++;
+    }
+
+    if(answered === 4){
+        showResult();
+    }
+}
+
+function showResult(){
+
+    let resultText = "";
+
+    if(score === 4){
+        resultText = "🟢 مستوى عالي من الذكاء البصري";
+    }
+    else if(score >= 2){
+        resultText = "🟡 مستوى متوسط";
+    }
+    else{
+        resultText = "🔴 يحتاج دعم وتدريب أكثر";
+    }
+
+    document.getElementById("result").innerHTML =
+        "النتيجة: " + score + "/4 <br>" + resultText;
+}
+
+</script>
+
+</body>
+</html>

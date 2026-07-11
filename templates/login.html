@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول | Takhati.Dz</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="auth-page">
+
+<a href="{{ url_for('index') }}" class="back-btn">رجوع</a>
+
+<div class="auth-card">
+
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="auth-logo" alt="logo">
+
+    <h2>تسجيل الدخول</h2>
+    <p>قم بتسجيل الدخول إلى حسابك</p>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-box">
+      {% for msg in messages %}
+        <p style="color:red; font-weight:bold;">
+          {{ msg }}
+        </p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+    <!-- FORM CORRECTED -->
+    <form method="POST">
+
+        <label>اسم المستخدم</label>
+        <input type="text" name="username" placeholder="أدخل اسم المستخدم" required>
+
+        <label>كلمة المرور</label>
+        <div class="password-box">
+            <input type="password" name="password" id="password" placeholder="أدخل كلمة المرور" required>
+            <span onclick="togglePassword()">👁</span>
+        </div>
+
+        <label>الصفة</label>
+      <select name="role" required>
+
+    <option value="admin">أدمن</option>
+    <option value="teacher">أستاذ</option>
+    <option value="parent">ولي أمر</option>
+    <option value="specialist">مختص</option>
+
+</select>
+
+        <button type="submit">تسجيل الدخول</button>
+
+    </form>
+
+    <a href="{{ url_for('register') }}" class="create-link">إنشاء حساب جديد</a>
+
+</div>
+
+<script>
+function togglePassword(){
+    let pass = document.getElementById("password");
+    pass.type = pass.type === "password" ? "text" : "password";
+}
+</script>
+
+</body>
+</html>

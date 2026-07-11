@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الملف الشخصي للأخصائي</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+</head>
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_dashboard') }}">رجوع</a>
+
+<form class="specialist-form">
+
+<h1>⭐️الملف الشخصي للأخصائي </h1>
+
+<h2>1. المعلومات الشخصية</h2>
+<input placeholder="الاسم واللقب">
+<input placeholder="تاريخ الميلاد">
+<input placeholder="رقم الهاتف">
+<input placeholder="البريد الإلكتروني">
+<input placeholder="العنوان">
+
+<h2>2. المؤهلات العلمية</h2>
+<input placeholder="الشهادة الجامعية">
+<input placeholder="التخصص">
+<input placeholder="الجامعة">
+<input placeholder="سنة التخرج">
+<textarea placeholder="شهادات أو دورات إضافية"></textarea>
+
+<h2>3. الخبرة المهنية</h2>
+<input placeholder="عدد سنوات الخبرة">
+<textarea placeholder="أماكن العمل السابقة"></textarea>
+<input placeholder="المنصب الذي شغلته">
+
+<div class="check-group">
+<label><input type="checkbox" checked> أطفال</label>
+<label><input type="checkbox" checked> مراهقون</label>
+<label><input type="checkbox"> بالغون</label>
+<label><input type="checkbox"> كبار السن</label>
+<label><input type="checkbox" checked> ذو الاحتياجات الخاصة</label>
+</div>
+
+<h2>4. المهارات المهنية</h2>
+<div class="check-group">
+<label><input type="checkbox" checked> إجراء المقابلة النفسية</label>
+<label><input type="checkbox" checked> التشخيص النفسي</label>
+<label><input type="checkbox" checked> تطبيق الاختبارات النفسية</label>
+<label><input type="checkbox" checked> كتابة التقارير النفسية</label>
+<label><input type="checkbox" checked> الإرشاد النفسي الفردي</label>
+<label><input type="checkbox"> الإرشاد الأسري</label>
+<label><input type="checkbox" checked> العلاج السلوكي المعرفي CBT</label>
+<label><input type="checkbox" checked> إدارة الحالات النفسية</label>
+<label><input type="checkbox" checked> العمل ضمن فريق متعدد التخصصات</label>
+</div>
+
+<h2>5. الاختبارات والمقاييس التي تتقنها</h2>
+<input placeholder="مقياس وكسلر لذكاء الأطفال">
+<input placeholder="اختبار رسم الرجل">
+<input placeholder="مقياس السلوك التكيفي">
+
+<h2>6. المهارات التقنية</h2>
+<div class="radio-group">
+<label><input type="radio" name="computer" checked> ممتاز</label>
+<label><input type="radio" name="computer"> جيد</label>
+<label><input type="radio" name="computer"> متوسط</label>
+</div>
+<textarea placeholder="برامج تستخدمها"></textarea>
+
+<h2>7. اللغات</h2>
+<table>
+<tr><th>اللغة</th><th>المستوى</th></tr>
+<tr><td>العربية</td>
+<tr><td>الفرنسية</td>
+<tr><td>الإنجليزية
+</table>
+
+<h2>8. أسئلة التقييم</h2>
+<textarea placeholder="كيف تتعامل مع حالة طفل يعاني من صعوبات سلوكية؟ "></textarea>
+<textarea placeholder="كيف تتصرف إذا رفض المريض التعاون؟ "></textarea>
+<textarea placeholder="ما هي أهم المبادئ الأخلاقية؟ "></textarea>
+
+<h2>9. المراجع المهنية</h2>
+<input placeholder="الاسم و اللقب">
+<input placeholder="المنصب">
+<input placeholder="رقم الهاتف">
+<input placeholder="عنوان البريد الالكتروني">
+
+<button type="button">حفظ الملف الشخصي</button>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>دردشة الأولياء</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+</head>
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_dashboard') }}">رجوع</a>
+
+<section class="chat-page">
+<h1>⭐️ دردشة والتواصل مع الأولياء</h1>
+
+<div class="chat-layout">
+
+    <aside class="parents-list">
+        <h3>حسابات الأولياء</h3>
+
+        <div class="parent-contact active">
+            <strong>سالم محمد</strong>
+            <span>ولي آدم</span>
+        </div>
+
+        <div class="parent-contact">
+            <strong>مراد فاطمة</strong>
+            <span>ولية ليان</span>
+        </div>
+
+        <div class="parent-contact">
+            <strong>قادري أمين</strong>
+            <span>ولي يوسف</span>
+        </div>
+    </aside>
+
+    <div class="chat-box">
+        <div class="chat-top">
+            <h3>المحادثة مع سالم محمد</h3>
+            <div>
+                <button>📞 اتصال</button>
+                <button>📷 كاميرا</button>
+            </div>
+        </div>
+
+        <div class="messages">
+            <p class="msg parent-msg">السلام عليكم، هل تحسن تركيز آدم هذا الأسبوع؟</p>
+            <p class="msg specialist-msg">وعليكم السلام، نعم يوجد تحسن واضح في التفاعل.</p>
+            <p class="voice-msg">🎤 رسالة صوتية: 00:18</p>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="اكتب رسالة هنا...">
+            <button>🎤</button>
+            <button>إرسال</button>
+        </div>
+    </div>
+
+</div>
+</section>
+
+</body>
+</html>

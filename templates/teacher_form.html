@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>استمارة الأستاذ</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+</head>
+
+<body>
+
+<a href="{{ url_for('account_choice') }}">رجوع</a>
+
+<div class="form-container">
+
+<h1>👨‍🏫 استمارة الأستاذ</h1>
+
+<form method="POST">
+
+<h3>👤 المعلومات الشخصية</h3>
+<input type="text" placeholder="الاسم الكامل">
+<input type="date">
+<select>
+    <option>الجنس</option>
+    <option>ذكر</option>
+    <option>أنثى</option>
+</select>
+<input type="text" placeholder="رقم الهاتف">
+<input type="email" placeholder="البريد الإلكتروني">
+<input type="text" placeholder="المدينة / الولاية">
+
+<h3>🎓 الشهادات</h3>
+<input type="text" placeholder="المستوى التعليمي">
+<input type="text" placeholder="التخصص">
+<input type="text" placeholder="الجامعة">
+<input type="text" placeholder="سنة التخرج">
+<select>
+    <option>هل لديك شهادة تربوية؟</option>
+    <option>نعم</option>
+    <option>لا</option>
+</select>
+
+<h3>🧑‍🏫 الخبرة المهنية</h3>
+<input type="number" placeholder="عدد سنوات الخبرة">
+<textarea placeholder="أماكن العمل السابقة"></textarea>
+<input type="text" placeholder="المواد التي تدرسها">
+<select>
+    <option>المستوى الذي تدرّسه</option>
+    <option>ابتدائي</option>
+    <option>متوسط</option>
+    <option>ثانوي</option>
+</select>
+
+<h3>🧠 المهارات</h3>
+<textarea placeholder="المهارات التربوية"></textarea>
+
+<h3>💻 طريقة التدريس</h3>
+<select>
+    <option>تقليدي</option>
+    <option>تفاعلي</option>
+    <option>رقمي</option>
+</select>
+
+<h3>📎 ملاحظات</h3>
+<textarea placeholder="ملاحظات إضافية"></textarea>
+
+<button type="submit">حفظ الاستمارة</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

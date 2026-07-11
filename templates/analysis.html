@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>التحليل</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="main-card">
+
+<h2>نتائج التحليل الذكي</h2>
+
+<h3>{{ problem }}</h3>
+
+<div class="circle" style="--percent: {{ percent }}%;">
+    {{ percent }}%
+</div>
+
+<p>المستوى: {{ level }}</p>
+<p>{{ advice }}</p>
+
+<div class="btn-row">
+    <a href="javascript:history.back()" class="btn-back">رجوع</a>
+    <a href="{{ url_for('iq_test') }}" class="btn-primary">التالي</a>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>بداية النشاط</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/child.css') }}">
+</head>
+
+<body>
+
+<div class="camera-status" id="camStatus">
+    📷 الكاميرا قيد التشغيل الآن
+</div>
+
+<div class="container">
+
+    <h1>🧠 بداية النشاط التعليمي</h1>
+
+    <div class="form-box">
+
+        <h2>📷 الموافقة على تشغيل الكاميرا</h2>
+
+        <p>
+            يستخدم هذا النظام الكاميرا فقط بعد موافقة الولي/الطفل،
+            وذلك من أجل متابعة الجلسة التعليمية وتحسين التركيز أثناء التعلم.
+        </p>
+
+        <ul>
+            <li>الكاميرا تعمل فقط أثناء استخدام البرنامج</li>
+            <li>يتم تفعيلها بعد الضغط على زر "أوافق"</li>
+            <li>عرض مباشر للفيديو داخل الصفحة</li>
+            <li>لا يتم تشغيل أي تسجيل بدون إذن المستخدم</li>
+        </ul>
+
+        <p>
+            بمجرد الضغط على "أوافق"، سيتم تشغيل الكاميرا مباشرة.
+        </p>
+
+        <button class="btn-yes" onclick="startCamera()">أوافق وتشغيل الكاميرا</button>
+        <button class="btn-no">لا أوافق</button>
+
+        <div class="video-container">
+            <video id="video" autoplay playsinline></video>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function startCamera() {
+
+    document.getElementById("camStatus").style.display = "block";
+
+    const video = document.getElementById("video");
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    .then(function(stream) {
+        video.srcObject = stream;
+    });
+
+    setTimeout(() => {
+        window.location.href = "/child_dashboard";
+    }, 3000);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takhati DZ | لوحة ولي الأمر</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/parent.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+<script>
+
+let currentRoom = "admin";
+
+// فتح الدردشة
+function toggleChat(){
+    document.getElementById("chat").classList.toggle("show");
+    loadMessages();
+}
+
+// اختيار محادثة
+function openChat(room){
+    currentRoom = room;
+    loadMessages();
+}
+
+// إرسال رسالة حقيقية للـ Flask
+function sendMessage(){
+
+    let input = document.getElementById("msgInput");
+    let text = input.value;
+
+    if(text.trim() === "") return;
+
+    fetch("/send_message", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            room: currentRoom,
+            text: text,
+            sender: "parent"
+        })
+    })
+    .then(res => res.json())
+    .then(() => {
+        input.value = "";
+        loadMessages();
+    });
+
+}
+
+// تحميل الرسائل من Flask
+function loadMessages(){
+
+    fetch(`/get_messages/${currentRoom}`)
+    .then(res => res.json())
+    .then(data => {
+
+        let box = document.getElementById("chatMessages");
+        box.innerHTML = "";
+
+        data.forEach(msg => {
+            box.innerHTML += `
+                <div class="msg ${msg.sender}">
+                    ${msg.text}
+                </div>
+            `;
+        });
+
+    });
+
+}
+
+</script>
+</script>
+
+</head>
+<!-- ================= CHAT SYSTEM ================= -->
+<div class="chat-panel" id="chat">
+
+    <div class="chat-box">
+
+        <!-- LEFT SIDE (USERS) -->
+        <div class="chat-users">
+
+            <h3>💬 المحادثات</h3>
+
+            <div class="user" onclick="openChat('admin')">👨‍💼 Admin</div>
+            <div class="user" onclick="openChat('teacher')">👨‍🏫 الأستاذ</div>
+            <div class="user" onclick="openChat('specialist')">🧑‍⚕️ المختص</div>
+
+        </div>
+
+        <!-- RIGHT SIDE (CHAT) -->
+        <div class="chat-main">
+
+            <div class="chat-header">
+                <h3 id="chatTitle">اختر محادثة</h3>
+                <button onclick="toggleChat()">✖️</button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <div class="chat-input">
+
+                <input type="text" id="msgInput" placeholder="اكتب رسالة...">
+
+                <button onclick="sendMessage()">➤</button>
+
+                <button>🎤</button>
+                <button>📞</button>
+                <button>🎥</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<body>
+
+<header class="top-bar">
+
+    <div class="logo">
+        <div class="logo-circle">
+            <i class="fa-solid fa-child-reaching"></i>
+        </div>
+        <div class="title">
+            <h1>Takhati DZ</h1>
+            <span>لوحة ولي الأمر</span>
+        </div>
+    </div>
+
+    <div class="header-buttons">
+        <a class="chat-btn" onclick="toggleChat()"><i class="fa-solid fa-comments"></i> الدردشة</a>
+        <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> خروج</a>
+    </div>
+
+</header>
+
+<section class="welcome">
+    <h2>أهلاً بك 👋</h2>
+    <p>متابعة ذكية لتطور طفلك داخل منصة Takhati.DZ</p>
+</section>
+
+<!-- MAIN CARDS -->
+<section class="cards">
+
+    <div class="card dashboard" onclick="openModal('dashboard')">
+        <i class="fa-solid fa-chart-line icon"></i>
+        <h3>لوحة المراقبة</h3>
+        <p>تحليل التقدم والإحصائيات</p>
+    </div>
+
+    <div class="card appointment" onclick="openModal('appointments')">
+        <i class="fa-solid fa-calendar-days icon"></i>
+        <h3>المواعيد الهامة</h3>
+        <p>جلسات مع المختصين</p>
+    </div>
+
+    <div class="card payment" onclick="openModal('payment')">
+        <i class="fa-solid fa-credit-card icon"></i>
+        <h3>الدفع والاشتراك</h3>
+        <p>حالة الاشتراك والخدمات</p>
+    </div>
+
+</section>
+
+<!-- ================= DASHBOARD MODAL ================= -->
+<div class="modal" id="dashboard">
+
+    <div class="modal-content">
+
+        <!-- MAIN VIEW -->
+        <div class="view active" id="mainDashboard">
+
+            <h2>📊 لوحة المراقبة</h2>
+
+            <div class="sub-card blue" onclick="showView('reports')">
+                📊 <b>التقارير الأسبوعية</b><br>
+                اضغط لعرض تقارير 5 أسابيع
+            </div>
+
+            <div class="sub-card pink" onclick="showView('progress')">
+                📈 <b>نتائج التقدم</b><br>
+                عرض المنحنى والإحصائيات
+            </div>
+
+            <div class="sub-card green" onclick="showView('exercises')">
+                🧠 <b>التمارين والبرامج</b><br>
+                متابعة التمارين حسب الأسابيع
+            </div>
+
+            <button onclick="closeModal()">إغلاق</button>
+        </div>
+
+        <!-- REPORTS -->
+        <div class="view" id="reports">
+
+            <h2>📊 التقارير الأسبوعية</h2>
+
+            <div class="sub-card blue">الأسبوع 1: بداية جيدة وتفاعل متوسط مع التمارين</div>
+            <div class="sub-card blue">الأسبوع 2: تحسن في التركيز بنسبة 10%</div>
+            <div class="sub-card blue">الأسبوع 3: تطور في سرعة الفهم</div>
+            <div class="sub-card blue">الأسبوع 4: أداء مستقر وتفاعل عالي</div>
+            <div class="sub-card blue">الأسبوع 5: نتائج ممتازة وتقليل الأخطاء</div>
+
+            <button onclick="showView('mainDashboard')">🔙 رجوع</button>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="view" id="progress">
+
+            <h2>📈 نتائج التقدم</h2>
+
+            <div class="chart-box">
+                <canvas id="progressChart"></canvas>
+            </div>
+
+            <div class="sub-card pink">الأسبوع 1 → 40%</div>
+            <div class="sub-card pink">الأسبوع 2 → 55%</div>
+            <div class="sub-card pink">الأسبوع 3 → 63%</div>
+            <div class="sub-card pink">الأسبوع 4 → 75%</div>
+            <div class="sub-card pink">الأسبوع 5 → 82%</div>
+
+            <button onclick="showView('mainDashboard')">🔙 رجوع</button>
+        </div>
+
+        <!-- EXERCISES -->
+        <div class="view" id="exercises"><h2>🧠 التمارين والبرامج</h2>
+
+            <div class="sub-card green">الأسبوع 1: 6 تمارين منجزة</div>
+            <div class="sub-card green">الأسبوع 2: 8 تمارين منجزة</div>
+            <div class="sub-card green">الأسبوع 3: 10 تمارين منجزة</div>
+            <div class="sub-card green">الأسبوع 4: 7 تمارين منجزة</div>
+            <div class="sub-card green">الأسبوع 5: 12 تمرين منجزة</div>
+
+            <button onclick="showView('mainDashboard')">🔙 رجوع</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= APPOINTMENTS ================= -->
+<div class="modal" id="appointments">
+    <div class="modal-content">
+
+        <h2>📅 المواعيد الهامة</h2>
+
+        <div class="box blue">🧑‍⚕️ اليوم 18:30 — جلسة نفسية</div>
+        <div class="box pink">🏫 الخميس 10:00 — دورة حضورية</div>
+        <div class="box green">📞 السبت 16:00 — متابعة</div>
+        <div class="box yellow">🎯 الأحد 11:30 — تقييم</div>
+
+        <button onclick="closeModal()">إغلاق</button>
+    </div>
+</div>
+
+<!-- ================= PAYMENT ================= -->
+<div class="modal" id="payment">
+    <div class="modal-content">
+
+        <h2>💳 الدفع والاشتراك</h2>
+
+        <div class="box blue">📌 الاشتراك نشط</div>
+        <div class="box pink">🔒 كل العمليات ناجحة</div>
+        <div class="box green">📅 إشعار قبل التجديد</div>
+        <div class="box yellow">🎯 جميع المزايا مفعلة</div>
+
+        <button onclick="closeModal()">إغلاق</button>
+    </div>
+</div>
+
+
+        
+    
+</div>
+
+<script>
+
+// OPEN MAIN MODALS
+function openModal(id){
+    document.getElementById(id).classList.add("show");
+}
+
+// CLOSE MODALS
+function closeModal(){
+    document.querySelectorAll(".modal").forEach(m => m.classList.remove("show"));
+}
+
+// SWITCH DASHBOARD VIEWS
+function showView(id){
+
+    document.querySelectorAll(".view").forEach(v => {
+        v.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+}
+
+// CHAT
+function toggleChat(){
+    document.getElementById("chat").classList.toggle("show");
+}
+
+// CHART
+new Chart(document.getElementById("progressChart"), {
+    type: "line",
+    data: {
+        labels: ["يوم 1","يوم 3","يوم 5","يوم 10","يوم 15"],
+        datasets: [{
+            data: [40,55,63,75,82],
+            borderColor: "#4a90e2",
+            backgroundColor: "rgba(74,144,226,0.2)",
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } }
+    }
+});
+
+</script>
+
+</body>
+</html>

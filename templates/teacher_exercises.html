@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>التمارين</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+</head>
+
+<body>
+
+<a href="{{ url_for('teacher_dashboard') }}">رجوع</a>
+
+<div class="form-container">
+
+<h1>✏️ التمارين</h1>
+
+<form method="POST">
+
+<input type="text" name="title" placeholder="عنوان التمرين">
+<textarea name="question" placeholder="اكتب السؤال هنا"></textarea>
+<input type="text" name="correct_answer" placeholder="الإجابة الصحيحة">
+
+<button type="submit">إنشاء التمرين</button>
+
+</form>
+
+<hr>
+
+<h2>📋 التمارين المنشورة</h2>
+
+{% for ex in exercises %}
+<div class="card">
+
+<h3>{{ ex[2] }}</h3>
+<p>{{ ex[3] }}</p>
+
+</div>
+{% endfor %}
+
+</div>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تمارين التلاميذ</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exercises.css') }}">
+<script src="{{ url_for('static', filename='js/exercises.js') }}"></script>
+</head>
+
+<body>
+
+<div class="header">
+    
+    <h3>🎓 تمارين</h3>
+</div>
+
+<!-- 1 -->
+<div class="exercise">
+<h3>👁️ نرى في النهار</h3>
+<div class="option" onclick="checkAnswer(this,true)">☀️ شمس</div>
+<div class="option" onclick="checkAnswer(this,false)">🌙 قمر</div>
+<div class="option" onclick="checkAnswer(this,false)">⭐️ نجمة</div>
+</div>
+
+<!-- 2 -->
+<div class="exercise">
+<h3>🧃 نشرب عند العطش</h3>
+<div class="option" onclick="checkAnswer(this,true)">ماء</div>
+<div class="option" onclick="checkAnswer(this,false)">كتاب</div>
+<div class="option" onclick="checkAnswer(this,false)">سيارة</div>
+</div>
+
+<!-- 3 -->
+<div class="exercise">
+<h3>🐔 صوت الدجاجة</h3>
+<div class="option" onclick="checkAnswer(this,true)">دجاجة</div>
+<div class="option" onclick="checkAnswer(this,false)">قطة</div>
+<div class="option" onclick="checkAnswer(this,false)">كلب</div>
+</div>
+
+<!-- 4 -->
+<div class="exercise">
+<h3>🌙 نرى القمر في</h3>
+<div class="option" onclick="checkAnswer(this,true)">الليل</div>
+<div class="option" onclick="checkAnswer(this,false)">النهار</div>
+<div class="option" onclick="checkAnswer(this,false)">الصباح</div>
+</div>
+
+<!-- 5 -->
+<div class="exercise">
+<h3>🐟 السمك يعيش في</h3>
+<div class="option" onclick="checkAnswer(this,true)">الماء</div>
+<div class="option" onclick="checkAnswer(this,false)">الهواء</div>
+<div class="option" onclick="checkAnswer(this,false)">الصحراء</div>
+</div>
+
+<!-- 6 -->
+<div class="exercise">
+<h3>🐱 حيوان منزلي</h3>
+<div class="option" onclick="checkAnswer(this,true)">قطة</div>
+<div class="option" onclick="checkAnswer(this,false)">أسد</div>
+<div class="option" onclick="checkAnswer(this,false)">نمر</div>
+</div>
+
+<!-- 7 -->
+<div class="exercise">
+<h3>🌳 الشجرة تعطي</h3>
+<div class="option" onclick="checkAnswer(this,true)">أكسجين</div>
+<div class="option" onclick="checkAnswer(this,false)">حديد</div>
+<div class="option" onclick="checkAnswer(this,false)">نار</div>
+</div>
+
+<!-- 8 -->
+<div class="exercise">
+<h3>🚗 السيارة تسير على</h3>
+<div class="option" onclick="checkAnswer(this,true)">الطريق</div>
+<div class="option" onclick="checkAnswer(this,false)">الماء</div>
+<div class="option" onclick="checkAnswer(this,false)">السماء</div>
+</div>
+
+<!-- 9 -->
+<div class="exercise">
+<h3>✏️ نستعمل القلم لـ</h3>
+<div class="option" onclick="checkAnswer(this,true)">الكتابة</div>
+<div class="option" onclick="checkAnswer(this,false)">الأكل</div>
+<div class="option" onclick="checkAnswer(this,false)">النوم</div>
+</div>
+
+<!-- 10 -->
+<div class="exercise">
+<h3>📚 نقرأ في</h3>
+<div class="option" onclick="checkAnswer(this,true)">الكتاب</div>
+<div class="option" onclick="checkAnswer(this,false)">الطعام</div>
+<div class="option" onclick="checkAnswer(this,false)">السيارة</div>
+</div>
+
+<!-- 11 -->
+<div class="exercise">
+<h3>🔥 النار تكون</h3>
+<div class="option" onclick="checkAnswer(this,true)">حارة</div>
+<div class="option" onclick="checkAnswer(this,false)">باردة</div>
+<div class="option" onclick="checkAnswer(this,false)">زرقاء</div>
+</div>
+
+<!-- 12 -->
+<div class="exercise">
+<h3>❄️ الثلج يكون</h3>
+<div class="option" onclick="checkAnswer(this,true)">بارد</div>
+<div class="option" onclick="checkAnswer(this,false)">حار</div>
+<div class="option" onclick="checkAnswer(this,false)">ساخن</div>
+</div>
+
+<!-- 13 -->
+<div class="exercise">
+<h3>👂 نستعمل الأذن لـ</h3>
+<div class="option" onclick="checkAnswer(this,true)">السمع</div>
+<div class="option" onclick="checkAnswer(this,false)">الشم</div>
+<div class="option" onclick="checkAnswer(this,false)">اللمس</div>
+</div>
+
+<!-- 14 -->
+<div class="exercise">
+<h3>👃 نستعمل الأنف لـ</h3>
+<div class="option" onclick="checkAnswer(this,true)">الشم</div>
+<div class="option" onclick="checkAnswer(this,false)">الأكل</div>
+<div class="option" onclick="checkAnswer(this,false)">الرسم</div>
+</div><!-- 15 -->
+<div class="exercise">
+<h3>👀 نستعمل العين لـ</h3>
+<div class="option" onclick="checkAnswer(this,true)">الرؤية</div>
+<div class="option" onclick="checkAnswer(this,false)">السمع</div>
+<div class="option" onclick="checkAnswer(this,false)">الطبخ</div>
+</div>
+
+<!-- 16 -->
+<div class="exercise">
+<h3>🍞 نأكل في الفطور</h3>
+<div class="option" onclick="checkAnswer(this,true)">خبز</div>
+<div class="option" onclick="checkAnswer(this,false)">حجر</div>
+<div class="option" onclick="checkAnswer(this,false)">ورق</div>
+</div>
+
+<!-- 17 -->
+<div class="exercise">
+<h3>🌞 الشمس تظهر في</h3>
+<div class="option" onclick="checkAnswer(this,true)">النهار</div>
+<div class="option" onclick="checkAnswer(this,false)">الليل</div>
+<div class="option" onclick="checkAnswer(this,false)">البحر</div>
+</div>
+
+<!-- 18 -->
+<div class="exercise">
+<h3>🐦 الطائر</h3>
+<div class="option" onclick="checkAnswer(this,true)">يطير</div>
+<div class="option" onclick="checkAnswer(this,false)">يسبح فقط</div>
+<div class="option" onclick="checkAnswer(this,false)">يزرع</div>
+</div>
+
+<!-- 19 -->
+<div class="exercise">
+<h3>🏠 نسكن في</h3>
+<div class="option" onclick="checkAnswer(this,true)">بيت</div>
+<div class="option" onclick="checkAnswer(this,false)">شجرة</div>
+<div class="option" onclick="checkAnswer(this,false)">ماء</div>
+</div>
+
+<!-- 20 -->
+<div class="exercise">
+<h3>💧 الماء يكون</h3>
+<div class="option" onclick="checkAnswer(this,true)">سائل</div>
+<div class="option" onclick="checkAnswer(this,false)">خشب</div>
+<div class="option" onclick="checkAnswer(this,false)">حديد</div>
+</div>
+
+</body>
+</html>
+</body>
+</html>

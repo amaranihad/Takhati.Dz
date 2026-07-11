@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>برامج العلاج</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/therapy.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="/child_dashboard">🔙 رجوع</a>
+</div>
+
+<div class="container">
+
+<h1>🧠 البرامج العلاجية لصعوبات التعلم</h1>
+
+<div class="grid">
+
+    <div class="card" onclick="openGame(1)">النموذج الأول</div>
+
+    <div class="card locked" onclick="locked()">🔒 النموذج الثاني</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج الثالث</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج الرابع</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج الخامس</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج السادس</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج السابع</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج الثامن</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج التاسع</div>
+    <div class="card locked" onclick="locked()">🔒 النموذج العاشر</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openGame(n){
+    if(n !== 1){
+        alert("عليك بالدفع");
+        return;
+    }
+
+    window.location.href = "/therapy_game";
+}
+
+function locked(){
+    alert("🔒 عليك بالدفع لكي تتمكن من اجتياز هذا البرنامج");
+}
+
+</script>
+
+</body>
+</html>

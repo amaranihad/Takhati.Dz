@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الدردشة الحقيقية</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_dashboard') }}">رجوع</a>
+
+<section class="chat-page">
+<h1>⭐️ الدردشة والتواصل</h1>
+
+<div class="chat-layout">
+
+    <aside class="parents-list">
+        <h3>الحسابات المتاحة</h3>
+
+        {% if contacts %}
+            {% for contact in contacts %}
+            <div class="parent-contact"
+                 onclick="changeRoom('{{ contact.id }}', '{{ contact.username }}', '{{ contact.role }}')">
+                <strong>{{ contact.username }}</strong>
+                <span>
+                    {% if contact.role == 'admin' %}
+                        الإدارة
+                    {% elif contact.role == 'parent' %}
+                        ولي أمر
+                    {% elif contact.role == 'teacher' %}
+                        أستاذ
+                    {% else %}
+                        {{ contact.role }}
+                    {% endif %}
+                </span>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>لا توجد حسابات متاحة حالياً</p>
+        {% endif %}
+    </aside>
+
+    <div class="chat-box">
+
+        <div class="chat-top">
+            <h3 id="chatTitle">اختار حساباً لبدء المحادثة</h3>
+
+            <div>
+                <button onclick="startAudioCall()">📞 اتصال</button>
+                <button onclick="startVideoCall()">📷 اتصال فيديو</button>
+            </div>
+        </div>
+<div class="call-area" id="callArea" style="display:none;">
+
+    <div class="video-box">
+        <video id="localVideo" autoplay muted playsinline></video>
+        <span>أنت</span>
+    </div>
+
+    <div class="video-box">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <span>الطرف الآخر</span>
+    </div>
+
+    <div class="call-controls">
+        <button onclick="endCall()">إنهاء الاتصال</button>
+    </div>
+
+</div>
+        <div class="messages" id="messages">
+            <p class="voice-msg">اختار حساباً من القائمة لبدء الدردشة.</p>
+        </div>
+
+        <div class="chat-input">
+            <input id="messageInput" type="text" placeholder="اكتب رسالة هنا...">
+            <button onclick="sendMessage()">إرسال</button>
+            <button onclick="startRecording()">🎤</button>
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+<script>
+const socket = io();
+
+let currentRoom = null;
+let currentContactName = null;
+let sender = "الأخصائي";
+
+function changeRoom(contactId, username, role){
+    currentRoom = "chat_specialist_" + contactId;
+    currentContactName = username;
+
+    document.getElementById("chatTitle").textContent =
+        "المحادثة مع " + username + " - " + translateRole(role);
+
+    document.getElementById("messages").innerHTML = "";
+
+    socket.emit("join", { room: currentRoom });
+
+    addSystemMessage("تم فتح المحادثة مع " + username);
+    loadOldMessages();
+}
+
+function loadOldMessages(){
+    if(!currentRoom) return;
+
+    fetch("/get_messages/" + currentRoom)
+        .then(response => response.json())
+        .then(data => {
+            data.messages.forEach(msg => {
+                addMessage(msg.sender, msg.message);
+            });
+        })
+        .catch(error => {
+            addSystemMessage("تعذر تحميل الرسائل القديمة");
+        });
+}
+
+function translateRole(role){
+    if(role === "admin") return "الإدارة";
+    if(role === "parent") return "ولي أمر";
+    if(role === "teacher") return "أستاذ";
+    if(role === "specialist") return "مختص";
+    return role;
+}
+
+socket.on("status", function(data){
+    addSystemMessage(data.message);
+});
+
+socket.on("receive_message", function(data){
+    addMessage(data.sender, data.message);
+});
+
+function sendMessage(){
+    const input = document.getElementById("messageInput");
+    const message = input.value.trim();
+
+    if(!currentRoom){
+        alert("اختار حساباً أولاً");
+        return;
+    }
+
+    if(message === ""){
+        alert("اكتب رسالة أولا");
+        return;
+    }
+
+    socket.emit("send_message", {
+        room: currentRoom,
+        sender: sender,
+        message: message
+    });
+
+    input.value = "";
+}
+
+document.getElementById("messageInput").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        sendMessage();
+    }
+});
+
+function addMessage(senderName, message){
+    const box = document.getElementById("messages");const div = document.createElement("p");
+    div.className = senderName === sender ? "msg specialist-msg" : "msg parent-msg";
+
+    div.innerHTML = "<strong>" + senderName + ":</strong><br>" + message;
+
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+}
+
+function addSystemMessage(message){
+    const box = document.getElementById("messages");
+    const div = document.createElement("p");
+
+    div.className = "voice-msg";
+    div.textContent = message;
+
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+}
+
+let mediaRecorder;
+let audioChunks = [];
+let isRecording = false;
+
+async function startRecording(){
+
+    if(!currentRoom){
+        alert("اختار حساباً أولاً");
+        return;
+    }
+
+    if(!isRecording){
+        try{
+            const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
+
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = function(event){
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = function(){
+                const audioBlob = new Blob(audioChunks, { type:"audio/webm" });
+                const audioUrl = URL.createObjectURL(audioBlob);
+
+                addVoiceMessage(audioUrl);
+
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            mediaRecorder.start();
+            isRecording = true;
+            alert("بدأ التسجيل 🎤 اضغطي مرة أخرى للإيقاف");
+
+        }catch(error){
+            alert("لم يتم السماح باستعمال الميكروفون");
+        }
+
+    }else{
+        mediaRecorder.stop();
+        isRecording = false;
+    }
+}
+
+function addVoiceMessage(audioUrl){
+    const box = document.getElementById("messages");
+
+    const div = document.createElement("div");
+    div.className = "voice-msg";
+
+    div.innerHTML = `
+        🎤 رسالة صوتية:
+        <br>
+        <audio controls src="${audioUrl}"></audio>
+    `;
+
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+}
+
+function startAudioCall(){
+    if(!currentRoom){
+        alert("اختار حساباً أولاً");
+        return;
+    }
+
+    alert("الاتصال الصوتي يحتاج مرحلة WebRTC. الزر الآن مربوط ويعرف مع من سيتم الاتصال.");
+}
+
+function startVideoCall(){
+    if(!currentRoom){
+        alert("اختاري حساباً أولاً");
+        return;
+    }
+
+    alert("اتصال الفيديو يحتاج مرحلة WebRTC. الزر الآن مربوط ويعرف مع من سيتم الاتصال.");
+}
+</script>
+
+</body>
+</html>

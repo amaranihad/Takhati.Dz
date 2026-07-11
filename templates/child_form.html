@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>استمارة الولي</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+
+</head>
+
+<body>
+
+<a class="back" href="{{ url_for('account_choice') }}">رجوع</a>
+
+<!-- 🔴 فقط تعديل هنا: action -->
+<form id="childForm" class="form" method="POST" action="/go-child-home">
+
+<div class="form-header">
+    <div class="icon">📝</div>
+    <h1>نظام جمع البيانات النفسية والتربوية</h1>
+    <p>يرجى ملء جميع المعلومات بدقة</p>
+</div>
+
+    <h3>استمارة الطفل</h3>
+
+    <!-- المعلومات الأساسية -->
+    <input type="text" placeholder="الاسم">
+    <input type="text" placeholder="اللقب">
+    <input type="date" placeholder="تاريخ الميلاد">
+    <input type="text" placeholder="مكان الميلاد">
+
+    <select>
+        <option>الجنس</option>
+        <option>ذكر</option>
+        <option>أنثى</option>
+    </select>
+
+    <input type="number" placeholder="السن">
+    <input type="text" placeholder="المستوى الدراسي">
+    <input type="text" placeholder="المدرسة">
+
+    <hr>
+
+    <!-- النوم و الهاتف -->
+    <input type="text" placeholder="عدد ساعات النوم يومياً">
+    <input type="text" placeholder="عدد ساعات استخدام الهاتف / الألعاب">
+    <input type="text" placeholder="نوع الألعاب المفضلة">
+
+    <hr>
+
+    <!-- الوضع العائلي -->
+    <select>
+        <option>هل يعيش مع الأب والأم؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>هل يوجد مشاكل داخل الأسرة؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>الحالة العائلية</option>
+        <option>عادية</option>
+        <option>طلاق</option>
+        <option>كفالة</option>
+        <option>وفاة أحد الوالدين</option>
+    </select>
+
+    <input type="text" placeholder="إذا وفاة أحد الوالدين: من هو بالضبط؟">
+
+    <hr>
+
+    <!-- الجانب المدرسي -->
+    <input type="text" placeholder="المواد المفضلة">
+    <input type="text" placeholder="المواد الصعبة">
+
+    <select>
+        <option>مستوى التحصيل</option>
+        <option>ضعيف</option>
+        <option>متوسط</option>
+        <option>ممتاز</option>
+    </select>
+
+    <input type="text" placeholder="هل يعيد السنة؟ (اكتب نعم أو لا)">
+
+    <hr>
+
+    <!-- الحالة الصحية -->
+    <input type="text" placeholder="أمراض مزمنة">
+    <input type="text" placeholder="مشاكل نفسية سابقة">
+    <input type="text" placeholder="أدوية مستعملة">
+
+    <hr>
+
+    <button type="submit">
+        إرسال الاستمارة
+    </button>
+
+</form>
+
+</body>
+</html>

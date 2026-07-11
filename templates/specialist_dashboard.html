@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+
+<title>لوحة تحكم الأخصائي</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/specialist.css') }}">
+
+</head>
+
+<body>
+
+<a class="back-btn" href="/">رجوع</a>
+
+<div class="dashboard-header">
+
+<h1> لوحة تحكم الأخصائي</h1>
+
+<p>
+إدارة الأطفال والأولياء والتقارير النفسية
+</p>
+
+</div>
+
+<div class="dashboard-grid">
+
+<a href="{{ url_for('adaptation_settings') }}" class="cloud-card">
+
+<h2>⚙️ ضبط إعدادات التكييف</h2>
+
+<p>
+إعدادات النظام والتخصيص
+</p>
+
+</a>
+
+<a href="{{ url_for('specialist_analysis') }}" class="cloud-card">
+
+<h2>📊 تحليل بيانات المفحوص</h2>
+
+<p>
+تحليل بيانات الأطفال والأولياء
+</p>
+
+</a>
+
+<a href="{{ url_for('medical_records') }}" class="cloud-card">
+
+<h2>📁 السجلات الطبية الخاصة بالأطفال</h2>
+
+<p>
+ملفات وتقارير PDF
+</p>
+
+</a>
+
+<a href="{{ url_for('iq_results') }}" class="cloud-card">
+
+<h2>  نتائج اختبارات الذكاء و نتائج الاستبيان</h2>
+
+<p>
+عرض درجات الذكاء و نتائج الاستبيان
+</p>
+
+</a>
+
+</div>
+
+<a href="{{ url_for('specialist_real_chat') }}" class="star-chat">
+⭐️ دردشة وتواصل
+</a>
+
+
+<a href="{{ url_for('specialist_profile') }}"
+class="star-profile">
+
+⭐️ الملف الشخصي
+
+</a>
+
+</body>
+</html>

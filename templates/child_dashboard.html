@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة الطفل</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/child.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="/logout">🚪 تسجيل الخروج</a>
+</div>
+
+<div class="container">
+
+    <h1>👶 لوحة الطفل التعليمية</h1>
+
+    <div class="grid">
+
+        <!-- CARD 1 -->
+        <div class="card" onclick="goAI()">
+            📷 الكاميرا و التكييف اللحظي
+        </div>
+
+        <div class="card" onclick="goReader()">
+            🔊 القارئ الصوتي
+        </div>
+
+        <div class="card" onclick="goTherapy()">
+            🧩 البرامج العلاجية لصعوبات التعلم
+        </div>
+
+        <div class="card" onclick="goMaze()">
+🌀 المتاهة
+</div>
+
+    </div>
+
+</div>
+
+<script>
+function goAI(){
+    window.location.href = "/ai_panel";
+}
+
+function goReader(){
+    window.location.href = "/ai_reader";
+}
+
+function goTherapy(){
+    window.location.href = "/therapy_program";
+}
+function goMaze(){
+    window.location.href = "/maze";
+}
+</script>
+
+</body>
+</html>

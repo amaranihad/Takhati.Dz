@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الدروس</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+</head>
+
+<body>
+
+<a href="{{ url_for('teacher_dashboard') }}">رجوع</a>
+
+<div class="form-container">
+
+<h1>📚 رفع الدروس و الملخصات</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+<input type="text" name="title" placeholder="عنوان الدرس">
+<input type="file" name="pdf" accept="application/pdf">
+
+<button>رفع الدرس</button>
+
+</form>
+<h2>📚 الدروس المرفوعة</h2>
+
+{% for lesson in lessons %}
+<div class="card">
+
+    <h3>{{ lesson[2] }}</h3>
+
+    <a href="{{ url_for('static', filename='uploads/teacher/' + lesson[4]) }}"
+       target="_blank">
+       📄 عرض PDF
+    </a>
+
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

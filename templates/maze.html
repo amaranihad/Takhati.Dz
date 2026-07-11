@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>المتاهة</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/maze.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="/child_dashboard">🔙 رجوع</a>
+</div>
+
+<div class="container">
+
+<h1>🌀 المتاهة</h1>
+
+<div class="welcome">
+    مرحباً بك يا صغير 👋  
+    يبدو أنك قمت بعمل ممتاز!  
+    لكي تنال مكافئتك الأسبوعية 🎁
+</div>
+
+<div class="grid">
+
+<div class="week locked" onclick="locked()">🔒 الأسبوع الاول</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع الثاني</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع الثالث</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع الرابع</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع الخامس</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع السادس</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع السابع</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع الثامن</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع التاسع</div>
+<div class="week locked" onclick="locked()">🔒 الأسبوع العاشر</div>
+
+</div>
+
+</div>
+
+<script>
+
+
+
+function locked(){
+    alert("🔒 يجب أن تدرس أسبوعاً كاملاً لتنال مكافئتك");
+}
+
+</script>
+
+</body>
+</html>

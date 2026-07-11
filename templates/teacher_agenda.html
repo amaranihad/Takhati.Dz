@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>المداولات</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+</head>
+
+<body>
+
+<a href="{{ url_for('teacher_dashboard') }}">رجوع</a>
+
+<div class="form-container">
+
+<h1>📅 المداولات</h1>
+
+<input type="date">
+<textarea placeholder="ملاحظات اليوم"></textarea>
+
+<button>حفظ</button>
+
+</div>
+
+</body>
+</html>

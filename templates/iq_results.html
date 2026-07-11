@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>نتائج اختبارات الذكاء</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+</head>
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_dashboard') }}">رجوع</a>
+
+<section class="data-page">
+<h1> نتائج اختبارات الذكاء للمفحوصين و نتائج الاستبيان</h1>
+
+<div class="iq-list">
+    <div class="iq-card">
+        <span>آدم بن سالم</span>
+        <strong>درجة الذكاء: 54 
+/
+           نتيجة  الاستبيان :%60
+        </strong>
+    </div>
+
+    <div class="iq-card">
+        <span>ليان مراد</span>
+        <strong>درجة الذكاء: 56
+/
+                       نتيجة  الاستبيان :%33.4 
+
+        </strong>
+    </div>
+
+    <div class="iq-card">
+        <span>يوسف قادري</span>
+        <strong>درجة الذكاء: 49
+/
+                       %نتيجة الاستبيان :75.9  
+
+        </strong>
+    </div>
+</div>
+</section>
+
+</body>
+</html>

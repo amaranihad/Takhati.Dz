@@ -1,0 +1,202 @@
+body{
+    margin:0;
+    font-family:"Segoe UI", Tahoma, Arial, sans-serif;
+    background: linear-gradient(135deg,#eaf6ff,#d6eeff);
+    color:#1b2b3a;
+}
+
+/* الصفحة */
+.page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    padding:20px;
+}
+
+/* رسالة النجاح */
+.success{
+    display:none;
+    background:rgba(46,204,113,0.15);
+    border:1px solid #2ecc71;
+    color:#1e7e4b;
+    padding:15px 25px;
+    border-radius:15px;
+    font-weight:700;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* البطاقات */
+.cards{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+/* card */
+.card{
+    width:300px;
+    background:rgba(255,255,255,0.9);
+    padding:25px;
+    border-radius:20px;
+    border:1px solid rgba(120,180,255,0.3);
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+    cursor:pointer;
+    transition:0.3s;
+    text-align:center;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(0,0,0,0.18);
+    background:#f5fbff;
+}
+
+.card h2{
+    color:#1e6fae;
+}
+
+.card p{
+    color:#4b6b85;
+}
+
+/* forms */
+.form{
+    display:none;
+    width:100%;
+    max-width:650px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid rgba(120,180,255,0.3);
+    box-shadow:0 20px 50px rgba(0,0,0,0.12);
+
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* animation */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* title */
+.form h3{
+    text-align:center;
+    color:#1d3f66;
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+/* inputs */
+.form input,
+.form select{
+    width:100%;
+    padding:12px 14px;
+    margin:8px 0;
+    border-radius:12px;
+    border:1px solid #d0d7e2;
+    background:#f9fbff;
+    outline:none;
+    transition:0.2s;
+}
+
+.form input:focus,
+.form select:focus{
+    border-color:#4da3ff;
+    box-shadow:0 0 10px rgba(77,163,255,0.25);
+}
+
+/* button */
+.form button{
+    margin-top:15px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#4da3ff,#6dd5ff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.form button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(77,163,255,0.35);
+}
+
+/* back button */
+.back{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:white;
+    padding:10px 15px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:700;
+    color:#1e6fae;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    transition:0.3s;
+}
+
+.back:hover{
+    transform:scale(1.05);
+    background:#eaf6ff;
+}
+
+/* clean animation for cards */
+.card{
+    animation:fadeIn 0.4s ease-in-out;
+}
+
+/* ===== فقط صفحات الاستمارة ===== */
+
+body > .form{
+    display:block;
+    width:90%;
+    max-width:900px;
+    margin:90px auto 40px;
+    padding:35px;
+    box-sizing:border-box;
+}
+
+body > .form h3{
+    font-size:30px;
+    color:#135c9c;
+}
+
+body > .form h4{
+    margin-top:28px;
+    padding:14px 18px;
+    border-radius:14px;
+    background:#eef7ff;
+    color:#1f5f96;
+    border-right:5px solid #4da3ff;
+}
+
+body > .form input,
+body > .form select{
+    box-sizing:border-box;
+    padding:15px 18px;
+    margin:10px 0;
+    font-size:15px;
+    border-radius:16px;
+    background:#f7fbff;
+}
+
+body > .form hr{
+    border:none;
+    height:1px;
+    background:#d9eaff;
+    margin:28px 0;
+}
+
+body > .form button{
+    height:58px;
+    font-size:17px;
+}

@@ -1,0 +1,594 @@
+/* ===============================
+   SPECIALIST DASHBOARD CSS
+   Light Blue Medical Clinic Style
+================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#4da3ff;
+    --secondary:#8fd0ff;
+    --soft:#eef8ff;
+    --white:#ffffff;
+    --text:#1d3f5f;
+    --muted:#6f8fa8;
+    --shadow:0 20px 45px rgba(77,163,255,0.18);
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:"Segoe UI", Tahoma, Arial, sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+        linear-gradient(135deg,#eaf7ff,#d8efff,#f7fcff);
+    overflow-x:hidden;
+}
+
+/* نجوم ديكور */
+body::before{
+    content:"⭐️ ⭐️ ⭐️ ⭐️ ⭐️";
+    position:fixed;
+    top:35px;
+    left:40px;
+    font-size:22px;
+    opacity:.35;
+    letter-spacing:25px;
+    animation:starsMove 5s infinite alternate ease-in-out;
+    pointer-events:none;
+}
+
+body::after{
+    content:"✦ ✧ ✦ ✧ ✦";
+    position:fixed;
+    bottom:40px;
+    right:40px;
+    font-size:26px;
+    color:#74c4ff;
+    opacity:.45;
+    letter-spacing:28px;
+    animation:starsFloat 6s infinite alternate ease-in-out;
+    pointer-events:none;
+}
+
+@keyframes starsMove{
+    from{transform:translateY(0);}
+    to{transform:translateY(15px);}
+}
+
+@keyframes starsFloat{
+    from{transform:translateX(0);}
+    to{transform:translateX(-20px);}
+}
+
+/* زر الرجوع */
+.back-btn{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:999;
+    text-decoration:none;
+    background:rgba(255,255,255,.9);
+    color:#1976c9;
+    padding:12px 20px;
+    border-radius:18px;
+    font-weight:800;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(77,163,255,.25);
+    transition:.3s;
+}
+
+.back-btn:hover{
+    transform:translateY(-3px);
+    background:#ffffff;
+}
+
+/* Header */
+.dashboard-header{
+    text-align:center;
+    padding:90px 20px 35px;
+}
+
+.dashboard-header h1,
+.data-page h1,
+.chat-page h1,
+.empty-page h1{
+    font-size:38px;
+    margin:0 0 12px;
+    color:#135c9c;
+}
+
+.dashboard-header p{
+    color:var(--muted);
+    font-size:18px;
+}
+
+/* السحابات */
+.dashboard-grid{
+    width:90%;
+    max-width:1100px;
+    margin:20px auto 60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:28px;
+}
+
+.cloud-card{
+    text-decoration:none;
+    min-height:190px;
+    padding:30px;
+    border-radius:40px;
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.8);
+    box-shadow:var(--shadow);
+    color:var(--text);
+    position:relative;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.cloud-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:rgba(143,208,255,.35);
+    border-radius:50%;
+    top:-45px;
+    left:-35px;
+}
+
+.cloud-card::after{
+    content:"⭐️";
+    position:absolute;
+    bottom:18px;
+    left:22px;
+    font-size:28px;
+    opacity:.5;
+}
+
+.cloud-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 30px 65px rgba(77,163,255,.28);
+}
+
+.cloud-card h2{
+    margin:0 0 14px;
+    color:#1669ad;
+}
+
+.cloud-card p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* نجمة الدردشة والبروفايل */
+.star-chat,
+.star-profile{
+    position:fixed;
+    top:85px;
+    z-index:900;
+    text-decoration:none;
+    background:linear-gradient(135deg,#ffffff,#eaf7ff);
+    color:#1362a7;
+    padding:16px 22px;
+    border-radius:50px;
+    font-weight:900;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(77,163,255,.25);
+    transition:.3s;
+}
+
+.star-chat{
+    right:25px;
+}
+
+.star-profile{
+    left:25px;
+}
+
+.star-chat:hover,
+.star-profile:hover{
+    transform:scale(1.08);
+}
+
+/* صفحات البيانات */
+.data-page,
+.empty-page,
+.chat-page{
+    width:90%;
+    max-width:1150px;
+    margin:90px auto 50px;
+    padding:30px;
+    border-radius:35px;
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(18px);
+    box-shadow:var(--shadow);
+}
+
+.counter{
+    text-align:center;
+    background:#eaf7ff;
+    color:#1669ad;
+    padding:12px;
+    border-radius:18px;
+    font-weight:800;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    margin-top:25px;
+}
+
+.info-card{
+    background:rgba(255,255,255,.92);
+    border-radius:26px;
+    padding:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    border:1px solid rgba(77,163,255,.18);
+    transition:.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-6px);
+}
+
+.info-card h3{
+    color:#135c9c;
+    margin-top:0;
+}
+
+.info-card p{
+    color:#486b86;
+    line-height:1.7;
+}
+
+/* غير متوفر */
+.empty-box{
+    margin:40px auto;
+    max-width:500px;
+    text-align:center;
+    padding:60px;
+    background:white;
+    border-radius:35px;
+    font-size:28px;
+    font-weight:900;
+    color:#1976c9;
+    box-shadow:var(--shadow);
+}
+
+/* PDF */
+.pdf-card button,
+.chat-top button,
+.chat-input button,
+.specialist-form button{
+    border:none;
+    border-radius:16px;
+    padding:12px 20px;
+    background:linear-gradient(135deg,#4da3ff,#8fd0ff);
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.pdf-card button:hover,
+.chat-top button:hover,
+.chat-input button:hover,
+.specialist-form button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(77,163,255,.35);
+}
+
+/* IQ */
+.iq-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    margin-top:25px;
+}
+
+.iq-card{
+    background:white;
+    padding:22px;
+    border-radius:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:var(--shadow);
+}
+
+.iq-card strong{
+    color:#1677c9;
+}
+
+/* Chat */
+.chat-layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:25px;
+}
+
+.parents-list,
+.chat-box{
+    background:white;
+    border-radius:28px;
+    padding:22px;
+    box-shadow:var(--shadow);
+}
+
+.parent-contact{
+    padding:15px;
+    border-radius:18px;
+    margin:12px 0;
+    background:#f2f9ff;
+    cursor:pointer;
+}
+
+.parent-contact.active{
+    background:linear-gradient(135deg,#4da3ff,#8fd0ff);
+    color:white;
+}
+
+.parent-contact span{
+    display:block;
+    margin-top:5px;
+    font-size:14px;
+}
+
+.chat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid #d8ecff;
+    padding-bottom:15px;
+}
+
+.messages{
+    min-height:260px;
+    padding:20px 0;
+}
+
+.msg,
+.voice-msg{
+    max-width:70%;
+    padding:14px 18px;
+    border-radius:22px;
+    margin:12px 0;
+    line-height:1.6;
+}
+
+.parent-msg{
+    background:#eef8ff;
+}
+
+.specialist-msg{
+    background:#4da3ff;
+    color:white;
+    margin-right:auto;
+}
+
+.voice-msg{
+    background:#fff7db;
+    color:#8a6b00;
+}
+
+.chat-input{
+    display:flex;
+    gap:10px;
+}
+
+.chat-input input{
+    flex:1;
+    padding:14px;
+    border-radius:16px;
+    border:1px solid #cfe7ff;
+    outline:none;
+}
+
+/* Form المختص */
+.specialist-form{
+    width:90%;
+    max-width:950px;
+    margin:90px auto 50px;
+    padding:35px;
+    border-radius:35px;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(18px);
+    box-shadow:var(--shadow);
+}
+
+.specialist-form h1{
+    text-align:center;
+    color:#135c9c;
+    font-size:36px;
+}
+
+.specialist-form h2{
+    margin-top:30px;
+    background:#eef8ff;
+    color:#1669ad;
+    padding:15px 20px;
+    border-radius:18px;
+    border-right:5px solid #4da3ff;
+}
+
+.specialist-form input,
+.specialist-form textarea,
+.specialist-form select{
+    width:100%;
+    margin:10px 0;
+    padding:15px;
+    border-radius:16px;
+    border:1px solid #cfe7ff;
+    background:#f8fcff;
+    outline:none;
+    font-size:15px;
+}
+
+.specialist-form textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.specialist-form input:focus,
+.specialist-form textarea:focus{
+    border-color:#4da3ff;
+    box-shadow:0 0 0 4px rgba(77,163,255,.15);
+}
+
+.check-group,
+.radio-group{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+    margin:15px 0;
+}
+
+.check-group label,
+.radio-group label{
+    background:#f2f9ff;
+    padding:14px;
+    border-radius:16px;
+    color:#345c7a;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+th,td{
+    padding:14px;
+    border:1px solid #d8ecff;
+    text-align:center;
+}
+
+th{
+    background:#eaf7ff;
+    color:#1669ad;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+    .dashboard-header h1,
+    .data-page h1,
+    .chat-page h1,
+    .empty-page h1{
+        font-size:28px;
+    }
+
+    .star-chat,
+    .star-profile{
+        position:static;
+        display:block;
+        width:90%;
+        margin:15px auto;
+        text-align:center;
+    }
+
+    .chat-layout{
+        grid-template-columns:1fr;
+    }
+
+    .chat-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .iq-card{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .specialist-form{
+        padding:22px;
+    }
+
+    body::before,
+    body::after{
+        display:none;
+    }
+}
+.call-area{
+    margin:20px 0;
+    padding:20px;
+    border-radius:25px;
+    background:#eef8ff;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.video-box{
+    background:white;
+    border-radius:20px;
+    padding:12px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(77,163,255,.18);
+}
+
+.video-box video{
+    width:100%;
+    height:220px;
+    border-radius:16px;
+    background:#d8ecff;
+    object-fit:cover;
+}
+
+.video-box span{
+    display:block;
+    margin-top:8px;
+    font-weight:800;
+    color:#1669ad;
+}
+
+.call-controls{
+    grid-column:1 / -1;
+    text-align:center;
+}
+
+.call-controls button{
+    background:#ff5c5c;
+    color:white;
+    border:none;
+    border-radius:16px;
+    padding:12px 25px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+    .call-area{
+        grid-template-columns:1fr;
+    }
+}
+.pdf-btn{
+    display:inline-block;
+    text-decoration:none;
+    border-radius:16px;
+    padding:12px 22px;
+    background:linear-gradient(135deg,#4da3ff,#8fd0ff);
+    color:white;
+    font-weight:800;
+    margin-top:10px;
+}
+
+.pdf-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(77,163,255,.35);
+}

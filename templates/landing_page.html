@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+
+    <!-- IMPORTANT: landing CSS فقط -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div class="landing-wrapper">
+
+    <!-- Card -->
+    <div class="landing-card">
+
+        <h1>👋 مرحبا بك في حسابك</h1>
+
+        <p>
+            👨‍👩‍👧 مرحبا بك أنت و طفلك/طفلتك في حساباتكم الخاصة ✨<br>
+            يمكنك الدخول لحسابك الشخصي وحساب طفلك بكل سهولة
+        </p>
+
+    </div>
+
+    <!-- زر الدخول (من landing.css فقط) -->
+    <a href="{{ url_for('account_choice') }}" class="landing-btn">
+        🚀 تفضل بالدخول
+    </a>
+
+</div>
+
+</body>
+</html>

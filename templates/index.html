@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مرحباً بك | Takhati.Dz</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="welcome-page">
+    <img src="{{ url_for('static', filename='images/welcome_logo.jpg') }}" class="welcome-image">
+
+    <a href="{{ url_for('login') }}" class="enter-btn">➜</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>استمارة الولي</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+    
+
+</head>
+
+<body>
+<a class="back" href="{{ url_for('account_choice') }}">رجوع</a>
+
+<form id="parentForm" class="form" method="POST" action="{{ url_for('parent_form') }}">
+
+    <div class="form-header">
+        <div class="icon">📝</div>
+        <h1>نظام جمع البيانات النفسية والتربوية</h1>
+        <p>يرجى ملء جميع المعلومات بدقة</p>
+    </div>
+
+    <h3>👨‍👩‍👧 استمارة ولي الأمر</h3>
+
+    <!-- ================= PERSONAL INFO ================= -->
+    <h4>🟢 المعلومات الشخصية</h4>
+
+    <input type="text" placeholder="الاسم واللقب">
+    <input type="number" placeholder="السن / تاريخ الميلاد">
+    <input type="tel" placeholder="رقم الهاتف">
+    <input type="email" placeholder="البريد الإلكتروني">
+    <input type="text" placeholder="العنوان الكامل">
+    <input type="text" placeholder="رقم بطاقة التعريف">
+
+    <hr>
+
+    <!-- ================= FAMILY STATUS ================= -->
+    <h4>🟡 الوضع العائلي</h4>
+
+    <select>
+        <option>الحالة العائلية</option>
+        <option>متزوج</option>
+        <option>مطلق</option>
+        <option>أرمل</option>
+        <option>منفصل</option>
+    </select>
+
+    <input type="number" placeholder="عدد الأطفال في الأسرة">
+    <input type="text" placeholder="ترتيب الطفل (الأول / الثاني...)">
+
+    <select>
+        <option>هل يعيش الطفل مع</option>
+        <option>الأب والأم</option>
+        <option>أحدهما فقط</option>
+        <option>وصي / كفالة</option>
+    </select>
+
+    <hr>
+
+    <!-- ================= SOCIAL STATUS ================= -->
+    <h4>🟠 الوضع الاجتماعي والمهني</h4>
+
+    <select>
+        <option>مستوى الدخل</option>
+        <option>ضعيف</option>
+        <option>متوسط</option>
+        <option>جيد</option>
+    </select>
+
+    <input type="text" placeholder="المهنة / العمل">
+    <input type="text" placeholder="ساعات العمل اليومية">
+
+    <select>
+        <option>وقت التواجد مع الطفل</option>
+        <option>كثير</option>
+        <option>متوسط</option>
+        <option>قليل</option>
+    </select>
+
+    <hr>
+
+    <!-- ================= PARENTING STYLE ================= -->
+    <h4>🔵 طريقة التعامل مع الطفل</h4>
+
+    <select>
+        <option>طريقة التربية</option>
+        <option>صارم</option>
+        <option>متوازن</option>
+        <option>متساهل</option>
+    </select>
+
+    <select>
+        <option>هل يتم استخدام العقاب البدني؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>هل يتم الحوار عند الخطأ؟</option>
+        <option>دائماً</option>
+        <option>أحياناً</option>
+        <option>نادراً</option>
+    </select>
+
+    <select>
+        <option>هل يتم متابعة الدراسة؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <hr>
+
+    <!-- ================= PSYCHOLOGICAL STATUS ================= -->
+    <h4>🟣 الحالة النفسية للولي</h4>
+
+    <select>
+        <option>هل تعاني من</option>
+        <option>قلق</option>
+        <option>اكتئاب</option>
+        <option>ضغط نفسي</option>
+    </select>
+
+    <input type="text" placeholder="تاريخ مشاكل نفسية في العائلة (اختياري)">
+
+    <select>
+        <option>مستوى التوتر داخل البيت</option>
+        <option>منخفض</option>
+        <option>متوسط</option>
+        <option>عالي</option>
+    </select>
+
+    <hr>
+
+    <!-- ================= FAMILY ENVIRONMENT ================= -->
+    <h4>🔴 البيئة الأسرية</h4>
+
+    <select>
+        <option>هل يوجد خلافات داخل البيت؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>هل يوجد عنف أسري؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>مستوى التواصل داخل الأسرة</option>
+        <option>ضعيف</option>
+        <option>متوسط</option>
+        <option>جيد</option>
+    </select>
+
+    <hr>
+
+    <!-- ================= FOLLOW-UP ================= -->
+    <h4>🟤 متابعة الطفل</h4>
+
+    <select>
+        <option>من المسؤول الأساسي عن الطفل؟</option>
+        <option>الأب</option>
+        <option>الأم</option>
+        <option>كلاهما</option>
+    </select>
+
+    <select>
+        <option>هل تراجع المدرسة؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>هل يتابع الواجبات؟</option>
+        <option>نعم</option>
+        <option>أحياناً</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+<option>هل يستخدم الهاتف مع الطفل كثيراً؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <select>
+        <option>هل يضع قواعد واضحة؟</option>
+        <option>نعم</option>
+        <option>لا</option>
+    </select>
+
+    <hr>
+
+    <!-- ================= GOAL ================= -->
+    <h4>🎯 الهدف من التسجيل</h4>
+
+    <select>
+        <option>سبب التسجيل</option>
+        <option>متابعة الطفل</option>
+        <option>حل مشاكل سلوكية</option>
+        <option>تحسين المستوى الدراسي</option>
+    </select>
+
+    <input type="text" placeholder="ما الذي تريد تغييره في الطفل؟">
+
+    <hr>
+
+   <button type="submit">
+    إرسال الاستمارة
+</button>
+
+</form>

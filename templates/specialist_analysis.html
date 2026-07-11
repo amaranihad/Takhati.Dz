@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تحليل بيانات المفحوص</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+</head>
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_dashboard') }}">رجوع</a>
+
+<header class="dashboard-header">
+    <h1>📊 تحليل بيانات المفحوص</h1>
+    <p>مركز متابعة بيانات الأطفال والأولياء المسجلين</p>
+</header>
+
+<div class="dashboard-grid">
+    <a class="cloud-card" href="{{ url_for('children_accounts') }}">
+        <h2>👦 حسابات الأطفال المسجلة</h2>
+        <p> حسابات: آدم، ليان، يوسف</p>
+    </a>
+
+    <a class="cloud-card" href="{{ url_for('children_notes') }}">
+        <h2>📝 ملاحظات كل طفل مسجل</h2>
+        <p>نشاط، التزام، تحسن، حضور</p>
+    </a>
+
+    <a class="cloud-card" href="{{ url_for('weekly_reports') }}">
+        <h2>📅 التقريرات الأسبوعية</h2>
+        <p>تقارير متابعة أسبوعية للأطفال</p>
+    </a>
+
+    <a class="cloud-card" href="{{ url_for('parents_accounts') }}">
+        <h2>👨‍👩‍👧 حسابات الأولياء المسجلين</h2>
+        <p> الأولياء مع معلوماتهم الشخصية</p>
+    </a>
+
+
+     <a class="cloud-card" href="{{ url_for('specialist_camera') }}">
+        <h2>تسجيلات الكاميرا الخاصة بالاطفال</h2>
+        <p>فيديوهات خاصة بالاطفال لمتابعة نشاطهم </p>
+    </a>
+
+</div>
+
+</body>
+</html>

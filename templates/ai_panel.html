@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>التكييف الذكي</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/child.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="/child_dashboard">🔙 رجوع</a>
+</div>
+
+<div class="container">
+
+    <h1 class="title">📷 التكييف الذكي</h1>
+
+    <div class="panel">
+
+        <p class="desc">
+            اختر ملف أو صوّر النص ثم اضغط على زر التكييف للحصول على نسخة مبسطة وواضحة.
+        </p>
+
+        <div class="inputs">
+
+            <label class="btn">
+                📁 اختيار ملف
+                <input type="file" id="fileInput" accept=".pdf">
+            </label>
+
+            <label class="btn">
+                📷 تصوير النص
+                <input type="file" accept="image/*" capture="environment">
+            </label>
+
+        </div>
+
+        <button class="adapt-btn" onclick="adaptText()">
+            ⚡️ تكييف النص
+        </button>
+
+        <div id="result" class="result-box">
+
+            <div class="section title-box">
+                📌 المثال (النص الأصلي + التكييف)
+            </div>
+
+            <!-- ORIGINAL TEXT -->
+            <div class="section box original">
+                <h3>📖 النص الأصلي</h3>
+                <p>
+                    في يوم من الأيام كانت نملة صغيرة تعمل بجد وتجتمع الحبوب لتخزنها في بيتها.
+                    وفي الجهة الأخرى كانت جرادة تقضي وقتها في الغناء واللعب دون عمل.
+                    مرت الأيام وجاء فصل الشتاء البارد فاختبأت النملة في بيتها الدافئ.
+                    أما الجرادة فكانت جائعة ولم تجد طعاماً.
+                    فهمت الجرادة أن العمل والاجتهاد في وقت الرخاء يضمنان الحياة الكريمة في وقت الشدة.
+                </p>
+            </div>
+
+            <!-- ADAPTED TEXT -->
+            <div class="section box adapted">
+                <h3>✨ التكييف الذكي</h3>
+                <p>
+                    🟢 كانت هناك نملة صغيرة تعمل كل يوم وتجمع الطعام بجد.<br><br>
+
+                    🟡 في نفس الوقت كانت الجرادة تلعب وتغني ولا تهتم بالمستقبل.<br><br>
+
+                    ❄️ عندما جاء الشتاء البارد اختبأت النملة في بيتها الدافئ وأكلت مما خزنته.<br><br>
+
+                    😔 أما الجرادة فلم تجد طعاماً وأصبحت جائعة.<br><br>
+
+                    💡 تعلمت الجرادة أن العمل والاجتهاد اليوم يحميانك غداً.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function adaptText(){
+
+    let file = document.getElementById("fileInput").files[0];
+
+    if(!file){
+        alert("اختار ملف");
+        return;
+    }
+
+    let form = new FormData();
+    form.append("file", file);
+
+    let upload = await fetch("/upload_file", {
+        method: "POST",
+        body: form
+    });
+
+    let uploaded = await upload.json();
+
+    let response = await fetch("/adapt_text", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({text: uploaded.text})
+    });
+
+    let data = await response.json();
+
+    document.getElementById("result").innerHTML = data.result;
+}
+
+</script>
+
+</body>
+</html>

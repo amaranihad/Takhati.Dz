@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اختيار الحساب</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+</head>
+
+<body>
+
+<a class="back" href="{{ url_for('landing_page') }}">رجوع</a>
+
+<div class="page">
+
+    <div class="success">
+        لقد سجلت الدخول بنجاح، تفضل بالدخول وملء الاستمارة
+    </div>
+
+    <div class="cards">
+
+        <a class="card" href="{{ url_for('parent_form') }}">
+            <h2>👨‍👩‍👧 حساب الولي</h2>
+            <p>تابع تقدم طفلك واملأ بياناتك الشخصية</p>
+        </a>
+
+        <a class="card" href="{{ url_for('child_form') }}">
+            <h2>🧒 حساب الطفل</h2>
+            <p>ابدأ رحلتك التعليمية بكل سهولة</p>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

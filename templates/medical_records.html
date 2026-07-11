@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>السجلات الطبية</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+</head>
+
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_dashboard') }}">رجوع</a>
+
+<section class="data-page">
+
+<h1>📁 السجلات الطبية الخاصة بالأطفال</h1>
+
+<form method="POST" enctype="multipart/form-data" class="specialist-form">
+
+    <h2>رفع ملف طبي جديد</h2>
+
+    <input type="text" name="child_name" placeholder="اسم ولقب الطفل مثال: آدم بن سالم" required>
+
+    <input type="text" name="doctor_name" placeholder="اسم الطبيب الخاص مثال: د. يوسف قادري">
+
+    <input type="file" name="pdf_file" accept="application/pdf" required>
+
+    <button type="submit">رفع الملف الطبي</button>
+
+</form>
+
+<div class="info-grid">
+
+    {% if records %}
+        {% for record in records %}
+        <div class="info-card pdf-card">
+            <h3>📄 {{ record.child_name }}</h3>
+            <p>الطبيب الخاص: {{ record.doctor_name }}</p>
+            <p>اسم الملف: {{ record.file_name }}</p>
+            <p>تاريخ الرفع: {{ record.uploaded_at }}</p>
+
+            <a class="pdf-btn"
+               href="{{ url_for('static', filename='uploads/medical_records/' + record.file_name) }}"
+               target="_blank">
+                عرض PDF
+            </a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="info-card">
+            <h3>لا توجد سجلات طبية حاليا</h3>
+            <p>قم برفع أول ملف طبي بصيغة PDF.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+</section>
+
+</body>
+</html>

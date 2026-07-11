@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>المكتبة الرقمية</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+</head>
+
+<body>
+
+<a href="{{ url_for('teacher_dashboard') }}">رجوع</a>
+
+<div class="form-container">
+
+<h1>📖 المكتبة الرقمية</h1>
+
+<!-- رفع كتاب -->
+<form method="POST" enctype="multipart/form-data">
+
+<input type="text" name="title" placeholder="عنوان الكتاب">
+<input type="text" name="description" placeholder="وصف الكتاب">
+<input type="file" name="pdf" accept="application/pdf">
+
+<button type="submit">رفع الكتاب</button>
+
+</form>
+
+<hr>
+
+<h2>📚 الكتب المرفوعة</h2>
+
+{% for book in books %}
+
+<div class="card">
+
+    <h3>📘 {{ book.title }}</h3>
+    <p>{{ book.description }}</p>
+
+    <a class="pdf-btn"
+       href="{{ url_for('static', filename='uploads/teacher/' + book.file_name) }}"
+       target="_blank">
+       📄 عرض الكتاب
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

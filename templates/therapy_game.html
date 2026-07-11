@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لعبة الدخيل</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/therapy.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <a href="/child_dashboard">🔙 رجوع</a>
+</div>
+
+<div class="container">
+
+<h2>🍎 اكتشف الشيء الدخيل</h2>
+
+<p>اضغط على الشيء المختلف في كل سطر</p>
+
+<div id="levels"></div>
+
+<div id="score">النقاط: 0</div>
+
+</div>
+
+<script>
+
+let score = 0;
+
+/* GAME DATA */
+const levels = [
+
+{
+    items: [
+        ["🐿️","🐿️","🦒","🐿️"],
+        ["🥛","🍓","🥛","🥛"],
+        ["🌞","☀️","☀️","☀️"],
+        ["🐦","🐦","🐦","🐧"],
+        ["🍎","🍎","🍏","🍎"],
+        ["🚗","🚗","🚗","🚲"],
+        ["🐶","🐶","🐱","🐶"],
+        ["🌳","🌳","🌳","🌲"],
+        ["🍓","🍓","🍓","🍇"],
+        ["🦊","🦊","🐻","🦊"],
+        ["🥕","🥕","🥕","🌽"],
+        ["⚽️","⚽️","🏀","⚽️"],
+        ["🚀","🚀","🛸","🚀"]
+    ],
+    odd: [2,1,2,3,2,3,2,3,3,2,2,2,2]
+},
+
+{
+    items: [
+        ["🐶","🐶","🐱","🐶"],
+        ["🐟","🐟","🐟","🐙"],
+        ["🍌","🍌","🍎","🍌"],
+        ["🚗","🚗","🚲","🚗"],
+        ["🌙","🌙","☀️","🌙"],
+        ["🐸","🐸","🐸","🐍"],
+        ["🍩","🍩","🍪","🍩"],
+        ["🐔","🐔","🦆","🐔"],
+        ["🍉","🍉","🍉","🍇"],
+        ["🐝","🐝","🐝","🐞"]
+    ],
+    odd: [2,3,2,2,2,3,2,2,3,3]
+}
+
+];
+
+/* LOAD LEVELS */
+function loadLevels(){
+
+    let container = document.getElementById("levels");
+    container.innerHTML = "";
+
+    levels[0].items.forEach((row,rowIndex)=>{
+
+        let rowDiv = document.createElement("div");
+        rowDiv.className = "row";
+
+        row.forEach((item,colIndex)=>{
+
+            let el = document.createElement("div");
+            el.className = "item";
+            el.innerText = item;
+
+            el.onclick = function(){
+
+                if(colIndex === levels[0].odd[rowIndex]){
+
+                    el.classList.add("correct");
+                    score++;
+
+                    document.getElementById("score").innerText =
+                        "النقاط: " + score;
+
+                } else {
+
+                    document.body.classList.add("wrong");
+
+                    setTimeout(()=>{
+                        document.body.classList.remove("wrong");
+                    },500);
+
+                    alert("لقد أخطأت حاول مجددا");
+                }
+            };
+
+            rowDiv.appendChild(el);
+        });
+
+        container.appendChild(rowDiv);
+    });
+}
+
+loadLevels();
+
+</script>
+
+</body>
+</html>

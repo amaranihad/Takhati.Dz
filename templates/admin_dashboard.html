@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تحكم المدير | Takhati.Dz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="admin-body">
+
+    <aside class="admin-sidebar">
+        <div class="admin-logo">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Takhati Logo">
+            <h2>Takhati.Dz</h2>
+            <p>لوحة المدير</p>
+        </div>
+
+        <nav>
+            <a href="#stats" class="active">🏠الرئيسية</a>
+            <a href="#accounts">👥الحسابات</a>
+            <a href="#messages">📩الرسائل</a>
+            <a href="{{ url_for('logout') }}" class="logout">🚪تسجيل الخروج</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+
+        <header class="admin-topbar">
+            <div>
+                <h1>مرحبا بك في حساب المدير</h1>
+                <p>لوحة مراقبة حسابات المنصة Takhati.Dz</p>
+            </div>
+
+            <div class="admin-profile">
+                <span>{{ session.username if session.username else 'Admin' }}</span>
+                <div class="admin-dot"></div>
+            </div>
+        </header>
+
+        <!-- STATS -->
+        <section class="stats" id="stats">
+
+            <div class="stat-card">
+                <h3>عدد الحسابات</h3>
+                <strong>{{ total_accounts }}</strong>
+            </div>
+
+            
+            
+
+            <div class="stat-card">
+                <h3>النشطين</h3>
+                <strong>{{ active_accounts }}</strong>
+            </div>
+
+
+            <div class="stat-card purple">
+                <h3>الرسائل</h3>
+                <strong>{{ unread_messages }}</strong>
+            </div>
+
+        </section>
+
+        <!-- USERS -->
+        <section class="admin-panel" id="accounts">
+
+            <h2>الحسابات المسجلة</h2>
+
+            {% if users %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>اسم المستخدم</th>
+                        <th>الصفة</th>
+                        <th>تاريخ الإنشاء</th>
+                        <th>آخر دخول</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[2] }}</td>
+                    
+                          
+                        </td>
+
+                        <!-- CREATED AT -->
+                        <td>
+                            {{ user[3] if user[3] else '-' }}
+                        </td>
+
+                        <!-- LAST LOGIN -->
+                        <td>
+                            {{ user[4] if user[4] else 'لم يسجل الدخول بعد' }}
+                        </td>
+
+                        <!-- ACTIONS -->
+                        <td>
+                            {% if user[2] == 'admin' %}
+                                <span class="badge trusted">حساب مدير</span>
+                            {% else %}
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            {% else %}
+                <p>لا توجد حسابات بعد</p>
+            {% endif %}
+
+        </section>
+
+        <!-- MESSAGES -->
+        <section class="admin-panel" id="messages">
+            <h2>الرسائل</h2>
+            <p>لا توجد رسائل حالياً</p>
+        </section>
+
+    </main>
+
+</body>
+</html>

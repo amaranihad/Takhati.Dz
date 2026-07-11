@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>ملاحظات الأطفال</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/specialist.css') }}">
+</head>
+<body>
+
+<a class="back-btn" href="{{ url_for('specialist_analysis') }}">رجوع</a>
+
+<section class="data-page">
+<h1>📝 ملاحظات كل طفل مسجل</h1>
+
+<div class="info-grid">
+    <div class="info-card">
+        <h3>آدم بن سالم</h3>
+        <p>نشط أثناء الجلسات.</p>
+        <p>يدرس جيداً ويتجاوب مع التمارين.</p>
+        <p>يلتزم بالمواعيد بشكل ممتاز.</p>
+    </div>
+
+    <div class="info-card">
+        <h3>ليان مراد</h3>
+        <p>تتحسن تدريجياً في التواصل.</p>
+        <p>تحتاج دعماً في التركيز.</p>
+        <p>ملتزمة بالحضور الأسبوعي.</p>
+    </div>
+
+    <div class="info-card">
+        <h3>يوسف قادري</h3>
+        <p>نشاطه متوسط داخل الجلسة.</p>
+        <p>لا يلتزم أحياناً بالمواعيد.</p>
+        <p>يحتاج متابعة في السلوك المدرسي.</p>
+    </div>
+</div>
+</section>
+
+</body>
+</html>

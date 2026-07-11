@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>لوحة الأستاذ</title>
+
+<!-- 🔥 ربط CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+
+</head>
+
+<body>
+
+<!-- 🔙 زر الرجوع -->
+<a class="card-back-btn" href="/">رجوع</a>
+<div class="teacher-container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>👨‍🏫 لوحة الأستاذ</h2>
+
+        <a href="/teacher/dashboard">🏠 الرئيسية</a>
+        <a href="/teacher/profile">👤 الملف الشخصي</a>
+        <a href="/teacher/chat">💬 الدردشة</a>
+
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>مرحباً أستاذ 👋</h1>
+            <p>إدارة الدروس والتمارين ومتابعة التلاميذ بسهولة</p>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards">
+
+            <a href="/teacher/lessons" class="card">
+                📚 الدروس و الملخصات
+            </a>
+
+            <a href="/teacher/exercises" class="card">
+                📝 التمارين
+            </a>
+
+            <a href="/teacher/library" class="card">
+                📖 المكتبة الرقمية
+            </a>
+
+            <a href="/teacher/agenda" class="card">
+                📅 المداولات
+            </a>
+
+            <a href="/teacher/students" class="card">
+                📊 مراقبة التلاميذ
+            
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

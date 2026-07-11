@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اختيار نوع الصعوبة | Takhati.Dz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="question-page">
+
+<div class="question-card">
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="auth-logo" alt="logo">
+
+    <h1>اختاري نوع الصعوبة التي يعاني منها طفلك</h1>
+    <p>سيتم فتح الاستبيان المناسب حسب اختيارك</p>
+
+    <div class="disorder-grid">
+
+        <a href="{{ url_for('survey', category='learning') }}" class="disorder-card">صعوبات التعلم النمائية والأكاديمية</a>
+
+        <a href="{{ url_for('survey', category='autism') }}" class="disorder-card">طيف التوحد</a>
+
+        <a href="{{ url_for('survey', category='hyperactivity') }}" class="disorder-card">النشاط الحركي الزائد</a>
+
+        <a href="{{ url_for('survey', category='sensory') }}" class="disorder-card">الإعاقة السمعية والبصرية</a>
+
+        <a href="{{ url_for('survey', category='slow_learning') }}" class="disorder-card">بطء التعلم</a>
+
+        <a href="{{ url_for('survey', category='attention') }}" class="disorder-card">ضعف التركيز وتشتت الانتباه والاندفاعية</a>
+
+        <a href="{{ url_for('survey', category='slow_learning') }}" class="disorder-card">صعوبة إكتساب اللغات</a>
+       
+
+
+   
+</div>
+
+</body>
+</html>
