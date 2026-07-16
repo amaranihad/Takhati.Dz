@@ -221,7 +221,7 @@ async function startRecording(){
 
             mediaRecorder.start();
             isRecording = true;
-            alert("بدأ التسجيل 🎤 اضغطي مرة أخرى للإيقاف");
+            alert("بدأ التسجيل 🎤 اضغط مرة أخرى للإيقاف");
 
         }catch(error){
             alert("لم يتم السماح باستعمال الميكروفون");
@@ -260,7 +260,7 @@ function startAudioCall(){
 
 function startVideoCall(){
     if(!currentRoom){
-        alert("اختاري حساباً أولاً");
+        alert("اختار حساباً أولاً");
         return;
     }
 

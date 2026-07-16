@@ -1170,7 +1170,28 @@ h2{
 
 
 
+.back-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 28px;
+    background: #16a085;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
 
+.back-btn:hover {
+    background: #138d75;
+    transform: translateY(-2px);
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+}
 
 
 
