@@ -689,7 +689,7 @@ def specialist_profile():
 
  
 @app.route("/specialist/chat")
-def specialist_real_chat():
+def specialist_chat():
     conn = sqlite3.connect("database.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -704,12 +704,12 @@ def specialist_real_chat():
     contacts = cursor.fetchall()
     conn.close()
 
-    return render_template("real_chat.html", contacts=contacts)
+    return render_template("specialist_chat.html", contacts=contacts)
 
 
 @app.route("/specialist/chat/admin")
 def chat_admin():
-    return render_template("real_chat.html", chat_type="admin") 
+    return render_template("specialist_chat.html", chat_type="admin") 
 
 @socketio.on("send_message")
 def handle_send_message(data):
@@ -945,7 +945,7 @@ def teacher_chat():
 
     conn.close()
 
-    return render_template("real_chat.html", contacts=contacts)
+    return render_template("teacher_chat.html", contacts=contacts)
 
 
 @app.route('/teacher/profile')
@@ -1031,13 +1031,6 @@ def get_messages(room):
     return jsonify(messages.get(room, []))
 
 
-
-
-
-
-
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
 # رفع PDF واستخراج النص
 @app.route("/upload_file", methods=["POST"])
 def upload_file():
@@ -1056,6 +1049,15 @@ def upload_file():
 # تكييف النص بالذكاء الاصطناعي
 @app.route("/adapt_text", methods=["POST"])
 def adapt_text():
+
+    api_key = os.environ.get("OPENAI_API_KEY")
+
+    if not api_key:
+        return jsonify({
+            "error": "ميزة الذكاء الاصطناعي غير مفعلة حالياً."
+        }), 503
+
+    client = OpenAI(api_key=api_key)
 
     text = request.json.get("text")
 
@@ -1078,9 +1080,6 @@ def adapt_text():
     result = response.choices[0].message.content
 
     return jsonify({"result": result})
-
-
-
 
 
 @app.route("/home")

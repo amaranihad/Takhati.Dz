@@ -1025,18 +1025,10 @@ def send_message():
 
     return jsonify({"status": "ok"})
 
-
 @app.route("/get_messages/<room>", endpoint="get_messages_v1")
 def get_messages(room):
     return jsonify(messages.get(room, []))
 
-
-
-
-
-
-
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 # رفع PDF واستخراج النص
 @app.route("/upload_file", methods=["POST"])
@@ -1056,6 +1048,15 @@ def upload_file():
 # تكييف النص بالذكاء الاصطناعي
 @app.route("/adapt_text", methods=["POST"])
 def adapt_text():
+
+    api_key = os.environ.get("OPENAI_API_KEY")
+
+    if not api_key:
+        return jsonify({
+            "error": "ميزة الذكاء الاصطناعي غير مفعلة حالياً."
+        }), 503
+
+    client = OpenAI(api_key=api_key)
 
     text = request.json.get("text")
 
@@ -1078,6 +1079,7 @@ def adapt_text():
     result = response.choices[0].message.content
 
     return jsonify({"result": result})
+
 
 
 
