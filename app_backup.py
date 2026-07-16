@@ -1036,7 +1036,7 @@ def get_messages(room):
 
 
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 # رفع PDF واستخراج النص
 @app.route("/upload_file", methods=["POST"])
